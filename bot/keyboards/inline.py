@@ -1,3 +1,4 @@
+#keyboards/inline.py
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 def get_feedback_inline_keyboard():

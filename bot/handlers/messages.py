@@ -1,3 +1,4 @@
+#bot/handlers/messages.py
 from aiogram import Router, types
 from aiogram.filters import Command  # Импортируем Command для фильтрации команд
 from keyboards.reply import get_reply_keyboard

@@ -1,8 +1,9 @@
-# admin.py
+#bot/admin.py
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
+from database import UserFeedback  # Импортируем модель из database.py
 from config import DATABASE_URL  # Подключаем URL для базы данных
 
 # Создаем Flask приложение
@@ -11,18 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-# Модель для таблицы feedback
-class UserFeedback(db.Model):
-    __tablename__ = 'feedback'
-    id = db.Column(db.Integer, primary_key=True)
-    feedback_type = db.Column(db.String(50), nullable=False)
-    content = db.Column(db.Text, nullable=False)
-    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
-    chat_id = db.Column(db.BigInteger)
-    user_id = db.Column(db.Integer)
-    feedback_text = db.Column(db.Text)
-
-# Создание базы данных, если она не существует
+# Инициализация базы данных вручную
 def init_db():
     with app.app_context():
         db.create_all()
@@ -45,4 +35,6 @@ init_db()
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
 

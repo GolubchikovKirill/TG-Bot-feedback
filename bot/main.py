@@ -1,3 +1,4 @@
+#bot/main.py
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 from config import BOT_TOKEN
