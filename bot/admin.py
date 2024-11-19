@@ -5,11 +5,18 @@ from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from database import UserFeedback  # Импортируем модель из database.py
 from config import DATABASE_URL  # Подключаем URL для базы данных
+from dotenv import load_dotenv  # Для загрузки переменных из .env
+import os  # Для доступа к переменным окружения
+
+# Загрузка переменных из .env
+load_dotenv()
 
 # Создаем Flask приложение
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = os.getenv("SECRET_KEY")  # Загрузка секретного ключа из .env
+
 db = SQLAlchemy(app)
 
 # Инициализация базы данных вручную
