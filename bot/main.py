@@ -6,6 +6,7 @@ from handlers import messages, buttons
 from database import init_db
 import subprocess
 import asyncio
+import os
 
 # Инициализация бота и диспетчера
 bot = Bot(token=BOT_TOKEN)
@@ -21,7 +22,8 @@ dp.include_router(buttons.router)
 # Запуск admin.py как отдельного процесса
 def start_admin():
     try:
-        subprocess.Popen(["python", "admin.py"])
+        admin_path = os.path.join(os.path.dirname(__file__), "admin.py")  # Путь к admin.py
+        subprocess.Popen(["python3.13", admin_path])
         print("Admin.py запущен.")
     except Exception as e:
         print(f"Ошибка при запуске admin.py: {e}")

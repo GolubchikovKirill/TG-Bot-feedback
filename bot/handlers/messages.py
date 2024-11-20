@@ -17,12 +17,20 @@ async def start_command_handler(message: types.Message):
   
 @router.message(lambda message: message.text == "Обратная связь")  # Используем lambda-функцию для проверки текста
 async def feedback_message(message: types.Message):
-    await message.answer("Выберите тип обратной связи", reply_markup=get_feedback_inline_keyboard())
+    await message.answer("<b>Выберите тип обратной связи.</b>", 
+                         parse_mode="HTML", reply_markup=get_feedback_inline_keyboard())
 
 @router.message(Command("help"))
 @router.message(lambda message: message.text == "Помощь")  # Обрабатываем текст кнопки "Помощь"
 async def help_command_handler(message: types.Message):
-    await message.answer("Тут будет текст кнопки help", reply_markup=get_reply_keyboard())
+    await message.answer(
+          "<b>Для того, чтобы оставить обратную связь, нужно нажать на кнопку -Обратная связь-.</b>\n"
+            "<b>В появившемся сообщении выбрать тип обратной связи.</b>\n"
+            "<b>После этого написать свое сообщение для обратной связи.</b>\n"
+            "<b>Кнопка -Рекомендации- еще в разработке.</b>",
+                         parse_mode="HTML",
+                         reply_markup=get_reply_keyboard()
+    )
 
 # Обработчик для кнопки "Рекомендации"
 @router.message(lambda message: message.text == "Рекомендации")
