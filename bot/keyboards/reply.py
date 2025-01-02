@@ -1,23 +1,21 @@
-#keyboards/reply.py
+# keyboards/reply.py
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
-def get_reply_keyboard():
-    # Создаем кнопки с именованным аргументом text
-    button1 = KeyboardButton(text="Обратная связь")
-    button2 = KeyboardButton(text="Рекомендации")
-    button3 = KeyboardButton(text="Помощь")
+class ReplyKeyboardManager:
+    """Класс для управления reply-клавиатурами"""
     
-    # Создаем клавиатуру с кнопками
-    keyboard = ReplyKeyboardMarkup(
-        keyboard=[[button1], [button2, button3]],  # Список кнопок
-        resize_keyboard=True,  # Устанавливаем параметр для масштабирования
-        one_time_keyboard=False  # Не скрывать клавиатуру после нажатия
-    )
-    
-    return keyboard
+    def __init__(self):
+        self._feedback_button = KeyboardButton(text="Обратная связь")
+        self._help_button = KeyboardButton(text="Помощь")
+        self._recommendations_button = KeyboardButton(text="Рекомендации")
 
-
-
-
-
-
+    def get_main_keyboard(self) -> ReplyKeyboardMarkup:
+        """Создает и возвращает основную клавиатуру"""
+        return ReplyKeyboardMarkup(
+            keyboard=[
+                [self._feedback_button],
+                [self._help_button, self._recommendations_button]
+            ],
+            resize_keyboard=True,
+            input_field_placeholder="Выберите действие"
+        )
